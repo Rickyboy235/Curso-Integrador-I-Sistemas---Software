@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://jasperreports.sourceforge.net/jasperreports
+        http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="operaciones"
+        pageWidth="842"
+        pageHeight="595"
+        columnWidth="782"
+        leftMargin="30"
+        rightMargin="30"
+        topMargin="30"
+        bottomMargin="30">
+
+<!-- CAMPOS -->
+
+    <field name="numeroOrden" class="java.lang.String"/>
+    <field name="codigoCotizacion" class="java.lang.String"/>
+    <field name="cliente" class="java.lang.String"/>
+    <field name="vehiculo" class="java.lang.String"/>
+    <field name="conductor" class="java.lang.String"/>
+    <field name="fechaProgramada" class="java.time.LocalDate"/>
+    <field name="estado" class="java.lang.String"/>
+
+    <title>
+        <band height="75">
+
+            <staticText>
+                <reportElement
+                        x="0"
+                        y="0"
+                        width="782"
+                        height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="20" isBold="true"/>
+                </textElement>
+                <text><![CDATA[REPORTE DE OPERACIONES]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="0"
+                        y="35"
+                        width="782"
+                        height="20"/>
+                <textElement textAlignment="Center">
+                    <font size="12"/>
+                </textElement>
+                <text><![CDATA[Órdenes de servicio programadas]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement
+                        x="0"
+                        y="57"
+                        width="782"
+                        height="15"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <textFieldExpression><![CDATA[
+                    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm")
+                    .format(new java.util.Date())
+                ]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="30">
+
+            <staticText>
+                <reportElement
+                        x="0"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[N° Orden]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="90"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Cotización]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="180"
+                        y="0"
+                        width="150"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Cliente]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="330"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Vehículo]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="420"
+                        y="0"
+                        width="120"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Conductor]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="540"
+                        y="0"
+                        width="100"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Fecha]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                        x="640"
+                        y="0"
+                        width="142"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Estado]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="30">
+
+            <textField>
+                <reportElement
+                        x="0"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{numeroOrden}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="90"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{codigoCotizacion}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="180"
+                        y="0"
+                        width="150"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="330"
+                        y="0"
+                        width="90"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{vehiculo}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="420"
+                        y="0"
+                        width="120"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{conductor}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="540"
+                        y="0"
+                        width="100"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[
+                    $F{fechaProgramada} != null
+                    ? $F{fechaProgramada}.format(
+                        java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy")
+                    )
+                    : ""
+                ]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                        x="640"
+                        y="0"
+                        width="142"
+                        height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="25">
+
+            <staticText>
+                <reportElement
+                        x="0"
+                        y="5"
+                        width="650"
+                        height="15"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[TransAduanas - Reporte de Operaciones]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement
+                        x="650"
+                        y="5"
+                        width="132"
+                        height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[
+                    "Página " + $V{PAGE_NUMBER}
+                ]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+
+</jasperReport>

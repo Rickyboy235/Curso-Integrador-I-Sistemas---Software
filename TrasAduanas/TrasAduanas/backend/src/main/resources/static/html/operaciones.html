@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Operaciones</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/operaciones.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+
+        <main class="main">
+
+            <!-- HEADER -->
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <!-- BIENVENIDA -->
+                <div class="welcome">
+
+                    <div>
+
+                        <span class="welcome-label">
+                            GESTIÓN DE OPERACIONES
+                        </span>
+
+                        <h1>
+                            Control y seguimiento de la ejecución de servicios
+                        </h1>
+
+                        <p>
+                            Seguimiento de cada orden de servicio desde que
+                            queda pendiente hasta que se finaliza o presenta
+                            una incidencia.
+                        </p>
+
+                    </div>
+
+                    <div class="welcome-decoration">
+                        TF
+                    </div>
+
+                </div>
+
+
+                <div class="summary summary-operaciones">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Órdenes de servicio (OT)</span>
+                            <strong id="kpi-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>En ejecución</span>
+                            <strong id="kpi-ejecucion">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Finalizadas</span>
+                            <strong id="kpi-finalizada">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">04</div>
+                        <div>
+                            <span>Con incidencia</span>
+                            <strong id="kpi-incidencia">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section-header">
+
+                    <div>
+                        <span class="section-label">
+                            EJECUCIÓN DE SERVICIOS
+                        </span>
+
+                        <h2>
+                            Órdenes de servicio por estado
+                        </h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+
+                        <span class="process-count">
+                            <span id="ot-count">0</span> órdenes
+                        </span>
+
+                        <button class="btn-secundario" id="btnReporteOperaciones" type="button">
+                            Ver Reporte
+                        </button>
+
+                        <button class="btn-nueva" id="btnNuevaOrden" type="button">
+                            + Nueva orden de servicio
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="pipeline-scroll">
+
+                    <div class="pipeline">
+
+                        <div class="pipeline-stage" data-stage="pendiente">
+                            <div class="pipeline-stage-head">
+                                <h4>Pendiente</h4>
+                                <span class="pipeline-stage-count" id="count-pendiente">0</span>
+                            </div>
+                            <div id="pipeline-pendiente"></div>
+                        </div>
+
+                        <div class="pipeline-stage" data-stage="programada">
+                            <div class="pipeline-stage-head">
+                                <h4>Programada</h4>
+                                <span class="pipeline-stage-count" id="count-programada">0</span>
+                            </div>
+                            <div id="pipeline-programada"></div>
+                        </div>
+
+                        <div class="pipeline-stage" data-stage="ejecucion">
+                            <div class="pipeline-stage-head">
+                                <h4>En ejecución</h4>
+                                <span class="pipeline-stage-count" id="count-ejecucion">0</span>
+                            </div>
+                            <div id="pipeline-ejecucion"></div>
+                        </div>
+
+                        <div class="pipeline-stage is-perdida" data-stage="incidencia">
+                            <div class="pipeline-stage-head">
+                                <h4>Con incidencia</h4>
+                                <span class="pipeline-stage-count" id="count-incidencia">0</span>
+                            </div>
+                            <div id="pipeline-incidencia"></div>
+                        </div>
+
+                        <div class="pipeline-stage is-ganada" data-stage="finalizada">
+                            <div class="pipeline-stage-head">
+                                <h4>Finalizada</h4>
+                                <span class="pipeline-stage-count" id="count-finalizada">0</span>
+                            </div>
+                            <div id="pipeline-finalizada"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">SEGUIMIENTO</span>
+                        <h2>Órdenes de servicio</h2>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+
+                    <table class="opps-table">
+
+                        <thead>
+                            <tr>
+                                <th>N° Orden</th>
+                                <th>Cotización</th>
+                                <th>Cliente</th>
+                                <th>Vehículo</th>
+                                <th>Conductor</th>
+                                <th>Fecha programada</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="ordenes-tbody"></tbody>
+
+                    </table>
+
+                </div>
+
+                <p id="mensaje-vacio" class="process-note" style="display:none;">
+                    No hay órdenes de servicio registradas todavía.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTitulo">Nueva orden de servicio</h3>
+                <button type="button" class="modal-close" id="btnCerrarModal">✕</button>
+            </div>
+
+            <form id="formOrden">
+
+                <input type="hidden" id="campoId">
+
+                <div class="form-field">
+                    <label for="campoNumeroOrden">N° de orden</label>
+                    <input type="text" id="campoNumeroOrden" maxlength="20" placeholder="Ej. OT-000157" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoCotizacion">Cotización</label>
+                    <select id="campoCotizacion" required></select>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-field">
+                        <label for="campoVehiculo">Vehículo (opcional)</label>
+                        <select id="campoVehiculo"></select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoConductor">Conductor (opcional)</label>
+                        <select id="campoConductor"></select>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-field">
+                        <label for="campoFecha">Fecha programada</label>
+                        <input type="date" id="campoFecha" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoEstado">Estado</label>
+                        <select id="campoEstado" required>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="programada">Programada</option>
+                            <option value="ejecucion">En ejecución</option>
+                            <option value="incidencia">Con incidencia</option>
+                            <option value="finalizada">Finalizada</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <p id="formError" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModal">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar orden</button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+<!-- MODAL DE MENSAJE -->
+<div class="modal-overlay" id="mensajeModalOverlay">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h3>Acción no permitida</h3>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarMensajeModal">
+                ✕
+            </button>
+
+        </div>
+
+        <p id="mensajeModalTexto" class="mensaje-error"></p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnAceptarMensajeModal">
+                Aceptar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MODAL DE CONFIRMACIÓN -->
+<div class="modal-overlay" id="confirmarEliminarOverlay">
+
+    <div class="modal">
+
+        <div class="modal-head">
+
+            <h3>Confirmar eliminación</h3>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarConfirmarEliminar">
+                ✕
+            </button>
+
+        </div>
+
+        <p>
+            ¿Está seguro de que desea eliminar esta orden de servicio?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="btn-secundario"
+                id="btnCancelarEliminar">
+                Cancelar
+            </button>
+
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnConfirmarEliminar">
+                Eliminar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/operaciones.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Logística — Flota</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/logistica.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="welcome">
+                    <div>
+                        <span class="welcome-label">FLOTA</span>
+                        <h1>Vehículos y conductores</h1>
+                        <p>Control de la flota propia: unidades disponibles, vigencia de documentos y conductores habilitados.</p>
+                    </div>
+                    <div class="welcome-decoration">TF</div>
+                </div>
+
+                <div class="summary">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Vehículos registrados</span>
+                            <strong id="kpi-vehiculos-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>Vehículos aptos</span>
+                            <strong id="kpi-vehiculos-aptos">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Conductores registrados</span>
+                            <strong id="kpi-conductores-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">04</div>
+                        <div>
+                            <span>Licencias vigentes</span>
+                            <strong id="kpi-licencias-vigentes">0</strong>
+                        </div>
+                    </div>
+
+                                </div>
+
+                <!-- ================= REPORTE ================= -->
+                <div class="section-header reporte-header">
+                    <div>
+                        <span class="section-label">REPORTES</span>
+                        <h2>Reporte de logística</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <button class="btn-secundario" id="btnReporteLogistica" type="button">
+                            Ver Reporte
+                        </button>
+                    </div>
+                </div>
+
+                <!-- ================= VEHICULOS ================= -->
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">FLOTA PROPIA</span>
+                        <h2>Vehículos</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count"><span id="vehiculos-count">0</span> vehículos</span>
+                        <button class="btn-nueva" id="btnNuevoVehiculo" type="button">+ Nuevo vehículo</button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Placa tracto</th>
+                                <th>Placa carreta</th>
+                                <th>Vence SOAT</th>
+                                <th>Vence CITV</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vehiculos-tbody"></tbody>
+                    </table>
+                    <p id="vehiculos-mensaje-vacio" class="process-note" style="display:none;">No hay vehículos registrados todavía.</p>
+                </div>
+
+                <!-- ================= CONDUCTORES ================= -->
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">PERSONAL DE FLOTA</span>
+                        <h2>Conductores</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count"><span id="conductores-count">0</span> conductores</span>
+                        <button class="btn-nueva" id="btnNuevoConductor" type="button">+ Nuevo conductor</button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>N° doc.</th>
+                                <th>Licencia</th>
+                                <th>Categoría</th>
+                                <th>Vence licencia</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="conductores-tbody"></tbody>
+                    </table>
+                    <p id="conductores-mensaje-vacio" class="process-note" style="display:none;">No hay conductores registrados todavía.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL VEHICULO -->
+    <div class="modal-overlay" id="modalOverlayVehiculo">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloVehiculo">Nuevo vehículo</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalVehiculo">✕</button>
+            </div>
+
+            <form id="formVehiculo">
+
+                <input type="hidden" id="campoIdVehiculo">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoPlacaTracto">Placa tracto</label>
+                        <input type="text" id="campoPlacaTracto" maxlength="10" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoPlacaCarreta">Placa carreta (opcional)</label>
+                        <input type="text" id="campoPlacaCarreta" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoSoat">Vencimiento SOAT</label>
+                        <input type="date" id="campoSoat" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoCitv">Vencimiento CITV</label>
+                        <input type="date" id="campoCitv" required>
+                    </div>
+                </div>
+
+                <p id="formErrorVehiculo" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalVehiculo">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar vehículo</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Modal para mostrar mensajes -->
+<div class="modal-overlay" id="mensajeModalOverlayVehiculo">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Acción no permitida</h3>
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarMensajeModalVehiculo">
+                ✕
+            </button>
+        </div>
+
+        <p id="mensajeModalTextoVehiculo" class="mensaje-error"></p>
+
+        <div class="modal-actions">
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnAceptarMensajeModalVehiculo">
+                Aceptar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal-overlay" id="confirmarEliminarVehiculoOverlay">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Confirmar eliminación</h3>
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarConfirmarEliminarVehiculo">
+                ✕
+            </button>
+        </div>
+
+        <p>
+            ¿Está seguro de que desea eliminar este vehículo?
+        </p>
+
+        <div class="modal-actions">
+            <button
+                type="button"
+                class="btn-secundario"
+                id="btnCancelarEliminarVehiculo">
+                Cancelar
+            </button>
+
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnConfirmarEliminarVehiculo">
+                Eliminar
+            </button>
+        </div>
+    </div>
+</div>
+
+    <!-- MODAL CONDUCTOR -->
+    <div class="modal-overlay" id="modalOverlayConductor">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloConductor">Nuevo conductor</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalConductor">✕</button>
+            </div>
+
+            <form id="formConductor">
+
+                <input type="hidden" id="campoIdConductor">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoNombresConductor">Nombres</label>
+                        <input type="text" id="campoNombresConductor" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoApellidosConductor">Apellidos</label>
+                        <input type="text" id="campoApellidosConductor" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoNumDoc">N° documento</label>
+                    <input type="text" id="campoNumDoc" maxlength="15" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoLicencia">N° de licencia</label>
+                        <input type="text" id="campoLicencia" maxlength="15" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoCategoria">Categoría</label>
+                        <input type="text" id="campoCategoria" maxlength="5" placeholder="Ej. A-IIIc" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoVencimientoLicencia">Vencimiento de licencia</label>
+                    <input type="date" id="campoVencimientoLicencia" required>
+                </div>
+
+                <p id="formErrorConductor" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalConductor">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar conductor</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Modal para mostrar mensajes -->
+<div class="modal-overlay" id="mensajeModalOverlayConductor">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Acción no permitida</h3>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarMensajeModalConductor">
+                ✕
+            </button>
+        </div>
+
+        <p
+            id="mensajeModalTextoConductor"
+            class="mensaje-error">
+        </p>
+
+        <div class="modal-actions">
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnAceptarMensajeModalConductor">
+                Aceptar
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal-overlay" id="confirmarEliminarConductorOverlay">
+    <div class="modal">
+        <div class="modal-head">
+            <h3>Confirmar eliminación</h3>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="btnCerrarConfirmarEliminarConductor">
+                ✕
+            </button>
+        </div>
+
+        <p>
+            ¿Está seguro de que desea eliminar este conductor?
+        </p>
+
+        <div class="modal-actions">
+            <button
+                type="button"
+                class="btn-secundario"
+                id="btnCancelarEliminarConductor">
+                Cancelar
+            </button>
+
+            <button
+                type="button"
+                class="btn-nueva"
+                id="btnConfirmarEliminarConductor">
+                Eliminar
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/logistica.js"></script>
+
+</body>
+</html>

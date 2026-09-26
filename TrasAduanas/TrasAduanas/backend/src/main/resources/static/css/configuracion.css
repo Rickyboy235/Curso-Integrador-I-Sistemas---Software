@@ -1,0 +1,42 @@
+.settings-card {
+    background: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: 13px;
+    padding: 28px 32px;
+    max-width: 640px;
+}
+
+.settings-card + .settings-card {
+    margin-top: 24px;
+}
+
+.settings-card h3 {
+    font-size: 16px;
+    color: var(--color-tinta);
+    margin-bottom: 4px;
+}
+
+.settings-card .settings-desc {
+    font-size: 12px;
+    color: var(--color-texto-suave);
+    margin-bottom: 20px;
+}
+
+.mensaje-error,
+.mensaje-exito {
+    font-size: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    display: none;
+}
+
+.mensaje-error {
+    background: rgba(185, 74, 58, 0.08);
+    color: #B94A3A;
+}
+
+.mensaje-exito {
+    background: rgba(74, 140, 58, 0.08);
+    color: #3E7A34;
+}

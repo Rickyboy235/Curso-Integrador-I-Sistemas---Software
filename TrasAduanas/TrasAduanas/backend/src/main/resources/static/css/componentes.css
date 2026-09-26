@@ -1,0 +1,618 @@
+.pipeline-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.btn-nueva {
+    border: none;
+
+    background: var(--color-tinta);
+
+    color: var(--color-blanco);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 10px 16px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-nueva:hover {
+    background: var(--color-tinta-suave);
+}
+
+.pipeline-scroll {
+    overflow-x: auto;
+
+    padding-bottom: 10px;
+
+    margin: 0 -4px;
+}
+
+.pipeline {
+    display: flex;
+
+    gap: 14px;
+
+    min-width: 1180px;
+
+    padding: 4px;
+}
+
+.pipeline-stage {
+    flex: 1;
+
+    min-width: 190px;
+
+    background: var(--color-papel-hundido);
+
+    border: 1px solid var(--color-borde);
+
+    border-radius: 13px;
+
+    padding: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.pipeline-stage-head {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.pipeline-stage-head h4 {
+    font-size: 11px;
+
+    color: var(--color-tinta);
+
+    line-height: 1.4;
+}
+
+.pipeline-stage-count {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: var(--color-texto-suave);
+
+    background: var(--color-blanco);
+
+    border: 1px solid var(--color-borde);
+
+    border-radius: 20px;
+
+    padding: 2px 8px;
+
+    flex-shrink: 0;
+}
+
+.pipeline-stage.is-ganada .pipeline-stage-count {
+    color: var(--color-ganada);
+}
+
+.pipeline-stage.is-perdida .pipeline-stage-count {
+    color: var(--color-perdida);
+}
+
+.pipeline-card {
+    background: var(--color-blanco);
+
+    border: 1px solid var(--color-borde);
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.pipeline-card strong {
+    font-size: 12px;
+
+    color: var(--color-tinta);
+}
+
+.pipeline-card span {
+    font-size: 10px;
+
+    color: var(--color-texto-suave);
+}
+
+.pipeline-card-foot {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-top: 2px;
+}
+
+.pipeline-amount {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--color-ambar-oscuro);
+}
+
+.pipeline-owner {
+    width: 22px;
+    height: 22px;
+
+    border-radius: 50%;
+
+    background: var(--color-tinta);
+
+    color: var(--color-ambar);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+/* TABLA DE OPORTUNIDADES */
+
+.opps-table-wrapper {
+    background: var(--color-blanco);
+
+    border: 1px solid var(--color-borde);
+
+    border-radius: 13px;
+
+    overflow: hidden;
+}
+
+.opps-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.opps-table th {
+    text-align: left;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+
+    color: var(--color-texto-suave);
+
+    background: var(--color-papel-hundido);
+
+    padding: 12px 18px;
+
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.opps-table td {
+    padding: 14px 18px;
+
+    font-size: 12px;
+
+    color: var(--color-texto);
+
+    border-bottom: 1px solid var(--color-borde);
+}
+
+.opps-table tr:last-child td {
+    border-bottom: none;
+}
+
+.opps-cliente strong {
+    display: block;
+
+    font-size: 12px;
+
+    color: var(--color-tinta);
+}
+
+.opps-cliente span {
+    font-size: 10px;
+
+    color: var(--color-texto-suave);
+}
+
+.opps-owner {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.opps-owner-avatar {
+    width: 26px;
+    height: 26px;
+
+    border-radius: 50%;
+
+    background: var(--color-papel-hundido);
+
+    color: var(--color-ambar-oscuro);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+}
+
+/* ETAPA — badge */
+
+.stage-badge {
+    display: inline-block;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: var(--color-papel-hundido);
+
+    color: var(--color-tinta-suave);
+
+    white-space: nowrap;
+}
+
+.stage-badge.is-negociacion {
+    background: rgba(169, 130, 77, 0.14);
+
+    color: var(--color-ambar-oscuro);
+}
+
+.stage-badge.is-ganada {
+    background: var(--color-ganada-suave);
+
+    color: var(--color-ganada);
+}
+
+.stage-badge.is-perdida {
+    background: var(--color-perdida-suave);
+
+    color: var(--color-perdida);
+}
+
+/* LEYENDA DEL PROCESO (gateways del BPMN) */
+
+.process-note {
+    margin-top: 22px;
+
+    padding: 16px 20px;
+
+    border: 1px dashed var(--color-borde);
+
+    border-radius: 12px;
+
+    display: flex;
+
+    gap: 14px;
+
+    align-items: flex-start;
+}
+
+.process-note-icon {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: var(--color-papel-hundido);
+
+    color: var(--color-ambar-oscuro);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 12px;
+
+    flex-shrink: 0;
+}
+
+.process-note p {
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: var(--color-texto-suave);
+}
+
+/* MODAL: NUEVA OPORTUNIDAD */
+
+.modal-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(48, 43, 38, 0.45);
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 200;
+}
+
+.modal-overlay.show {
+    display: flex;
+}
+
+.modal {
+    width: 100%;
+
+    max-width: 440px;
+
+    background: var(--color-blanco);
+
+    border-radius: 14px;
+
+    padding: 24px;
+
+    box-shadow: 0 20px 45px rgba(62, 53, 44, 0.2);
+}
+
+.modal-head {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 18px;
+}
+
+.modal-head h3 {
+    font-size: 16px;
+
+    color: var(--color-tinta);
+}
+
+.modal-close {
+    border: none;
+
+    background: var(--color-papel-hundido);
+
+    color: var(--color-texto-suave);
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+}
+
+.modal-close:hover {
+    color: var(--color-perdida);
+}
+
+.form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-bottom: 14px;
+}
+
+.form-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+}
+
+.form-field label {
+    font-size: 11px;
+
+    font-weight: 700;
+
+    color: var(--color-texto-suave);
+}
+
+.form-field input,
+.form-field select {
+    border: 1px solid var(--color-borde);
+
+    border-radius: 9px;
+
+    padding: 10px 12px;
+
+    font-size: 13px;
+
+    color: var(--color-texto);
+
+    background: var(--color-papel);
+
+    font-family: inherit;
+}
+
+.form-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    padding-right: 34px;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%233E352C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+
+    cursor: pointer;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: 2px solid var(--color-ambar);
+
+    outline-offset: 1px;
+}
+
+.modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 8px;
+}
+
+.btn-secundario {
+    border: 1px solid var(--color-borde);
+
+    background: var(--color-blanco);
+
+    color: var(--color-texto-suave);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 10px 16px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background: var(--color-papel-hundido);
+}
+
+/* RESUMEN DE 5 TARJETAS (KPIs de envíos) */
+
+.summary-logistica {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.stage-badge.is-programada {
+    background: var(--color-programada-suave);
+
+    color: var(--color-programada);
+}
+
+/* BARRA DE PROGRESO */
+
+.progress-wrap {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.progress-track {
+    flex: 1;
+
+    height: 6px;
+
+    border-radius: 6px;
+
+    background: var(--color-papel-hundido);
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: 6px;
+
+    background: var(--color-ambar-oscuro);
+}
+
+.progress-fill.is-ganada {
+    background: var(--color-ganada);
+}
+
+.progress-fill.is-perdida {
+    background: var(--color-perdida);
+}
+
+.progress-label {
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: var(--color-texto-suave);
+
+    min-width: 30px;
+
+    text-align: right;
+}
+
+
+/* --- Responsive compartido --- */
+
+@media (max-width: 480px) {
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 1100px) {
+
+    .summary-logistica {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-logistica {
+        grid-template-columns: 1fr;
+    }
+
+}

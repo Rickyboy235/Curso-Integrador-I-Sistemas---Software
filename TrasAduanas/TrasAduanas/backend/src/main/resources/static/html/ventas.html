@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Ventas</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/ventas.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="welcome">
+                    <div>
+                        <span class="welcome-label">GESTIÓN DE VENTAS</span>
+                        <h1>Cotizaciones de servicio</h1>
+                        <p>Cotizaciones registradas, sus servicios y su estado actual.</p>
+                    </div>
+                    <div class="welcome-decoration">TF</div>
+                </div>
+
+                <div class="summary summary-ventas-simple">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Total de cotizaciones</span>
+                            <strong id="kpi-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>Pendientes</span>
+                            <strong id="kpi-pendientes">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Monto total cotizado</span>
+                            <strong id="kpi-monto">US$ 0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">COTIZACIONES</span>
+                        <h2>Listado de cotizaciones</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+
+                        <button class="btn-secundario" id="btnReporteCotizaciones" type="button">
+                            Ver Reporte
+                        </button>
+
+                        <button class="btn-nueva" id="btnNuevaCotizacion" type="button">
+                            + Nueva cotización
+                        </button>
+
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Ruta</th>
+                                <th>Tipo de carga</th>
+                                <th>Peso (kg)</th>
+                                <th>Estado</th>
+                                <th>Total</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cotizaciones-tbody">
+                        </tbody>
+                    </table>
+                </div>
+
+                <p id="mensaje-vacio" class="process-note" style="display:none;">
+                    Aún no hay cotizaciones registradas.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal modal-grande">
+
+            <div class="modal-head">
+                <h3 id="modalTitulo">Nueva cotización</h3>
+                <button type="button" class="modal-close" id="btnCerrarModal">✕</button>
+            </div>
+
+            <form id="formCotizacion">
+
+                <input type="hidden" id="campoId">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoCliente">Cliente</label>
+                        <select id="campoCliente" required></select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoUsuario">Registrado por (usuario)</label>
+                        <select id="campoUsuario" required></select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoOrigen">Origen</label>
+                        <input type="text" id="campoOrigen" maxlength="100" placeholder="Ej. Arequipa" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoDestino">Destino</label>
+                        <input type="text" id="campoDestino" maxlength="100" placeholder="Ej. Lima" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoTipoCarga">Tipo de carga</label>
+                        <input type="text" id="campoTipoCarga" maxlength="40" placeholder="Ej. Carga seca" required>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoPesoKg">Peso (kg)</label>
+                        <input type="number" id="campoPesoKg" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <div class="servicios-head">
+                        <label>Servicios cotizados</label>
+                        <button type="button" class="btn-secundario" id="btnAgregarServicio">+ Agregar servicio</button>
+                    </div>
+
+                    <div id="serviciosContenedor"></div>
+
+                    <p class="servicios-total">
+                        Total: <strong id="servicioTotalPreview">US$ 0.00</strong>
+                    </p>
+                </div>
+
+                <p id="formError" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModal">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar cotización</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="mensajeModalOverlay">
+        <div class="modal">
+            <div class="modal-head">
+                <h3>Acción no permitida</h3>
+                <button type="button" class="modal-close" id="btnCerrarMensajeModal">✕</button>
+            </div>
+
+            <p id="mensajeModalTexto" class="mensaje-error"></p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-nueva" id="btnAceptarMensajeModal">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmarEliminarOverlay">
+        <div class="modal">
+            <div class="modal-head">
+                <h3>Confirmar eliminación</h3>
+                <button type="button" class="modal-close" id="btnCerrarConfirmarEliminar">✕</button>
+            </div>
+
+            <p>
+                ¿Está seguro de que desea eliminar esta cotización?
+            </p>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-secundario" id="btnCancelarEliminar">
+                    Cancelar
+                </button>
+
+                <button type="button" class="btn-nueva" id="btnConfirmarEliminar">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <template id="tplServicioFila">
+        <div class="servicio-fila">
+            <input type="text" class="servicio-descripcion" placeholder="Descripción del servicio" maxlength="200" required>
+            <input type="number" class="servicio-cantidad" placeholder="Cant." min="0.01" step="0.01" required>
+            <input type="number" class="servicio-precio" placeholder="Precio unit." min="0" step="0.01" required>
+            <button type="button" class="btn-quitar-servicio" title="Quitar">✕</button>
+        </div>
+    </template>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/ventas.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport
+    xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="cotizaciones"
+    whenNoDataType="AllSectionsNoDetail"
+    pageWidth="842"
+    pageHeight="595"
+    orientation="Landscape"
+    columnWidth="802"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20">
+
+    <parameter name="tituloReporte" class="java.lang.String"/>
+
+        <field name="idCotizacion" class="java.lang.Integer"/>
+        <field name="codigoCotizacion" class="java.lang.String"/>
+        <field name="clienteRazonSocial" class="java.lang.String"/>
+        <field name="usuarioNombre" class="java.lang.String"/>
+        <field name="origen" class="java.lang.String"/>
+        <field name="destino" class="java.lang.String"/>
+        <field name="tipoCarga" class="java.lang.String"/>
+        <field name="pesoKg" class="java.math.BigDecimal"/>
+        <field name="estadoCotizacion" class="java.lang.String"/>
+        <field name="total" class="java.math.BigDecimal"/>
+
+        <title>
+            <band height="60">
+
+                <staticText>
+                    <reportElement
+                       x="0"
+                       y="10"
+                       width="802"
+                       height="30"/>
+
+                    <textElement textAlignment="Center">
+                        <font size="18" isBold="true"/>
+                    </textElement>
+
+                    <text><![CDATA[Reporte de Cotizaciones]]></text>
+                </staticText>
+
+            </band>
+        </title>
+
+    <columnHeader>
+        <band height="30">
+
+            <staticText>
+                <reportElement x="0" y="0" width="75" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Código]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="75" y="0" width="145" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Cliente]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="220" y="0" width="120" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Usuario]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="340" y="0" width="90" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Origen]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="430" y="0" width="90" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Destino]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="520" y="0" width="90" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Tipo de carga]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="610" y="0" width="60" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Peso (kg)]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="670" y="0" width="65" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Estado]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="735" y="0" width="67" height="30"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Total]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="25">
+
+            <textField>
+                <reportElement x="0" y="0" width="75" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{codigoCotizacion}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="75" y="0" width="145" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{clienteRazonSocial}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="220" y="0" width="120" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{usuarioNombre}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="340" y="0" width="90" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{origen}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="430" y="0" width="90" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{destino}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="520" y="0" width="90" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{tipoCarga}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="610" y="0" width="60" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{pesoKg}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="670" y="0" width="65" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{estadoCotizacion}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="S/ #,##0.00">
+                <reportElement x="735" y="0" width="67" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+    
+</jasperReport>
+

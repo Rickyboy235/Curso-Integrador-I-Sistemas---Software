@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Transflow — Acceso al sistema</title>
+
+  <!-- Fuentes -->
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="../css/login.css"
+  >
+
+</head>
+
+
+<body>
+
+  <div class="pantalla">
+
+
+    <aside class="panel-marca">
+
+      <div class="marca-contenido">
+
+        <div class="marca-logo">
+
+          <span class="marca-logo-icono">
+            TF
+          </span>
+
+          <span class="marca-logo-texto">
+            Transflow
+          </span>
+
+        </div>
+
+
+        <h1 class="marca-titulo">
+          Toda tu carga,<br>
+          bajo control.
+        </h1>
+
+
+        <p class="marca-descripcion">
+
+          Plataforma interna para gestionar las
+          operaciones de aduana, transporte y
+          almacén desde un solo lugar.
+
+        </p>
+
+
+        <ul class="marca-lista">
+
+          <li>
+
+            <span class="marca-lista-punto"></span>
+
+            Seguimiento de carga y trámites
+            aduaneros en tiempo real
+
+          </li>
+
+
+          <li>
+
+            <span class="marca-lista-punto"></span>
+
+            Coordinación de flota, grúas y
+            unidades de transporte
+
+          </li>
+
+
+          <li>
+
+            <span class="marca-lista-punto"></span>
+
+            Gestión centralizada de las
+            operaciones de la empresa
+
+          </li>
+
+        </ul>
+
+      </div>
+
+
+      <!-- Decoración -->
+
+      <div
+        class="marca-patron"
+        aria-hidden="true"
+      >
+
+        <svg
+          viewBox="0 0 400 400"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          <circle
+            cx="330"
+            cy="70"
+            r="140"
+            class="patron-circulo-1"
+          />
+
+          <circle
+            cx="300"
+            cy="340"
+            r="90"
+            class="patron-circulo-2"
+          />
+
+          <path
+            d="M20 380 Q 120 300 220 380"
+            class="patron-linea"
+          />
+
+        </svg>
+
+      </div>
+
+    </aside>
+
+
+    <main class="panel-formulario">
+
+      <div class="formulario-contenedor">
+
+
+        <!-- ENCABEZADO -->
+
+        <div class="formulario-encabezado">
+
+          <h2>
+            Acceso al sistema
+          </h2>
+
+          <p>
+            Ingresa tus credenciales autorizadas
+            para acceder a la plataforma Transflow.
+          </p>
+
+        </div>
+
+
+
+        <!-- FORMULARIO -->
+
+        <form
+          class="formulario"
+          id="formulario-login"
+          novalidate
+        >
+
+
+          <!-- CORREO -->
+
+          <div class="campo">
+
+            <label for="correo">
+              Correo electrónico
+            </label>
+
+
+            <div class="campo-entrada">
+
+              <svg
+                class="campo-icono"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+
+                <path
+                  d="M3 6.5C3 5.67 3.67 5 4.5 5h15c.83 0 1.5.67 1.5 1.5v11c0 .83-.67 1.5-1.5 1.5h-15A1.5 1.5 0 0 1 3 17.5v-11Z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+                <path
+                  d="m4 6 8 6.5L20 6"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+
+              </svg>
+
+
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                placeholder="nombre@empresa.com"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <span
+              class="campo-error"
+              id="error-correo"
+            >
+              Ingresa un correo electrónico válido.
+            </span>
+
+          </div>
+
+
+
+          <!-- DNI -->
+
+          <div class="campo">
+
+            <label for="dni">
+              DNI
+            </label>
+
+
+            <div class="campo-entrada">
+
+              <svg
+                class="campo-icono"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+
+                <rect
+                  x="3"
+                  y="5"
+                  width="18"
+                  height="14"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+                <circle
+                  cx="8.5"
+                  cy="11"
+                  r="1.8"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+                <path
+                  d="M6 15.5c.6-1.3 1.6-2 2.5-2s1.9.7 2.5 2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+
+                <path
+                  d="M14 10h4M14 13h4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                />
+
+              </svg>
+
+
+              <input
+                type="text"
+                id="dni"
+                name="dni"
+                placeholder="8 dígitos"
+                inputmode="numeric"
+                maxlength="8"
+                autocomplete="off"
+                required
+              >
+
+            </div>
+
+
+            <span class="campo-ayuda">
+              El DNI se utiliza para verificar tu identidad.
+            </span>
+
+
+            <span
+              class="campo-error"
+              id="error-dni"
+            >
+              El DNI debe tener 8 dígitos numéricos.
+            </span>
+
+          </div>
+
+
+
+          <!-- CONTRASEÑA -->
+
+          <div class="campo">
+
+            <label for="contrasena">
+              Contraseña
+            </label>
+
+
+            <div class="campo-entrada">
+
+              <svg
+                class="campo-icono"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+
+                <rect
+                  x="4.5"
+                  y="10"
+                  width="15"
+                  height="10"
+                  rx="2"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+                <path
+                  d="M8 10V7.5a4 4 0 0 1 8 0V10"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                />
+
+              </svg>
+
+
+              <input
+                type="password"
+                id="contrasena"
+                name="contrasena"
+                placeholder="Mínimo 8 caracteres"
+                autocomplete="current-password"
+                required
+              >
+
+
+              <button
+                type="button"
+                class="boton-ver-contrasena"
+                id="boton-ver-contrasena"
+                aria-label="Mostrar contraseña"
+                aria-pressed="false"
+              >
+
+                <svg
+                  class="icono-ojo"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+
+                  <path
+                    d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="3"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  />
+
+                </svg>
+
+              </button>
+
+            </div>
+
+
+            <span
+              class="campo-error"
+              id="error-contrasena"
+            >
+              Tu contraseña debe tener al menos 8 caracteres.
+            </span>
+
+          </div>
+
+
+
+          <!-- OPCIONES -->
+
+          <div class="formulario-opciones">
+
+            <label class="opcion-recordar">
+
+              <input
+                type="checkbox"
+                id="recordar"
+                name="recordar"
+              >
+
+              <span
+                class="opcion-recordar-caja"
+                aria-hidden="true"
+              ></span>
+
+              Mantener sesión iniciada
+
+            </label>
+
+
+            <a
+              href="#"
+              class="enlace-olvido"
+            >
+              ¿Olvidaste tu contraseña?
+            </a>
+
+          </div>
+
+
+
+          <!-- BOTÓN -->
+
+          <button
+            type="submit"
+            class="boton-principal"
+          >
+            Ingresar
+          </button>
+
+
+          <!-- MENSAJE DE ESTADO -->
+
+          <div
+            class="formulario-mensaje"
+            id="mensaje-estado"
+            role="status"
+            aria-live="polite"
+          ></div>
+
+
+        </form>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="../js/login.js"></script>
+
+</body>
+
+</html>

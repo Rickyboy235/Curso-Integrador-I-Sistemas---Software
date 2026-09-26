@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport
+        xmlns="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://jasperreports.sourceforge.net/jasperreports
+        http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+        name="direccion"
+        pageWidth="842"
+        pageHeight="595"
+        columnWidth="782"
+        leftMargin="30"
+        rightMargin="30"
+        topMargin="30"
+        bottomMargin="30">
+
+<!-- CAMPOS -->
+
+    <field name="tipo" class="java.lang.String"/>
+
+    <field name="nombreCompleto" class="java.lang.String"/>
+    <field name="dni" class="java.lang.String"/>
+    <field name="email" class="java.lang.String"/>
+    <field name="rolAsignado" class="java.lang.String"/>
+    <field name="estadoTexto" class="java.lang.String"/>
+
+    <field name="nombreRol" class="java.lang.String"/>
+    <field name="descripcionRol" class="java.lang.String"/>
+    <field name="permisosRol" class="java.lang.String"/>
+
+<!-- GRUPO: corta cada vez que cambia "tipo" (USUARIO -> ROL) -->
+
+    <group name="tipoGrupo">
+        <groupExpression><![CDATA[$F{tipo}]]></groupExpression>
+
+        <groupHeader>
+            <band height="40">
+
+                <!-- Título de sección USUARIOS -->
+                <textField>
+                    <reportElement x="0" y="0" width="782" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <textElement>
+                        <font size="13" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["USUARIOS DEL SISTEMA"]]></textFieldExpression>
+                </textField>
+
+                <!-- Título de sección ROLES -->
+                <textField>
+                    <reportElement x="0" y="0" width="782" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                    </reportElement>
+                    <textElement>
+                        <font size="13" isBold="true"/>
+                    </textElement>
+                    <textFieldExpression><![CDATA["ROLES CONFIGURADOS"]]></textFieldExpression>
+                </textField>
+
+                <!-- Encabezados de columna USUARIOS -->
+                <staticText>
+                    <reportElement x="0" y="20" width="200" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Nombre completo]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="200" y="20" width="90" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[DNI]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="290" y="20" width="220" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Email]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="510" y="20" width="140" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Rol]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="650" y="20" width="132" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Estado]]></text>
+                </staticText>
+
+                <!-- Encabezados de columna ROLES -->
+                <staticText>
+                    <reportElement x="0" y="20" width="150" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Rol]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="150" y="20" width="400" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Descripción]]></text>
+                </staticText>
+
+                <staticText>
+                    <reportElement x="550" y="20" width="232" height="20">
+                        <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                    </reportElement>
+                    <box><pen lineWidth="0.5"/></box>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="8" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Permisos]]></text>
+                </staticText>
+
+            </band>
+        </groupHeader>
+    </group>
+
+    <title>
+        <band height="60">
+
+            <staticText>
+                <reportElement x="0" y="0" width="782" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="20" isBold="true"/>
+                </textElement>
+                <text><![CDATA[REPORTE DE DIRECCIÓN GENERAL]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="0" y="33" width="782" height="12"/>
+                <textElement textAlignment="Center">
+                    <font size="9"/>
+                </textElement>
+                <text><![CDATA[Usuarios y roles del sistema]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="0" y="47" width="782" height="13"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[
+                    new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm")
+                    .format(new java.util.Date())
+                ]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+
+    <detail>
+        <band height="20">
+
+            <!-- Fila USUARIO -->
+            <textField>
+                <reportElement x="0" y="0" width="200" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{nombreCompleto}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="200" y="0" width="90" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{dni}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="290" y="0" width="220" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="510" y="0" width="140" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{rolAsignado}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="650" y="0" width="132" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("USUARIO")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{estadoTexto}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fila ROL -->
+            <textField>
+                <reportElement x="0" y="0" width="150" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{nombreRol}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="150" y="0" width="400" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{descripcionRol}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="550" y="0" width="232" height="20">
+                    <printWhenExpression><![CDATA[$F{tipo}.equals("ROL")]]></printWhenExpression>
+                </reportElement>
+                <box><pen lineWidth="0.5"/></box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{permisosRol}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="25">
+
+            <staticText>
+                <reportElement x="0" y="5" width="650" height="15"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <text><![CDATA[TransAduanas - Reporte de Dirección General]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="650" y="5" width="132" height="15"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[
+                    "Página " + $V{PAGE_NUMBER}
+                ]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageFooter>
+
+</jasperReport>

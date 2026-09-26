@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport
+    xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://jasperreports.sourceforge.net/jasperreports
+        http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="vehiculos"
+    pageWidth="842"
+    pageHeight="595"
+    orientation="Landscape"
+    columnWidth="802"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20">
+
+    <field name="idVehiculo" class="java.lang.Integer"/>
+    <field name="placaTracto" class="java.lang.String"/>
+    <field name="placaCarreta" class="java.lang.String"/>
+    <field name="soatVencimiento" class="java.time.LocalDate"/>
+    <field name="citvVencimiento" class="java.time.LocalDate"/>
+    <field name="estado" class="java.lang.String"/>
+
+    <columnHeader>
+        <band height="25">
+
+            <staticText>
+                <reportElement x="0" y="0" width="150" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Placa tracto]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="150" y="0" width="130" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Placa carreta]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="280" y="0" width="130" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Vence SOAT]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="410" y="0" width="130" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Vence CITV]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="540" y="0" width="100" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Estado]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="640" y="0" width="162" height="25"/>
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+                <text><![CDATA[ID vehículo]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <detail>
+    <band height="25">
+
+        <textField>
+            <reportElement x="0" y="0" width="150" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{placaTracto}]]></textFieldExpression>
+        </textField>
+
+        <textField>
+            <reportElement x="150" y="0" width="130" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{placaCarreta}]]></textFieldExpression>
+        </textField>
+
+        <textField>
+            <reportElement x="280" y="0" width="130" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{soatVencimiento}]]></textFieldExpression>
+        </textField>
+
+        <textField>
+            <reportElement x="410" y="0" width="130" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{citvVencimiento}]]></textFieldExpression>
+        </textField>
+
+        <textField>
+            <reportElement x="540" y="0" width="100" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement
+                textAlignment="Center"
+                verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+        </textField>
+
+        <textField>
+            <reportElement x="640" y="0" width="162" height="25"/>
+            <box>
+                <pen lineWidth="0.5"/>
+            </box>
+            <textElement
+                textAlignment="Center"
+                verticalAlignment="Middle"/>
+            <textFieldExpression><![CDATA[$F{idVehiculo}]]></textFieldExpression>
+        </textField>
+
+    </band>
+</detail>
+
+</jasperReport>

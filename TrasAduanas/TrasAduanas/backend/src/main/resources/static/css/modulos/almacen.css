@@ -1,0 +1,57 @@
+/* =========================================================
+   MODULO: ALMACEN
+   Solo lo exclusivo de esta pantalla.
+   Lo comun vive en base.css, layout.css y componentes.css.
+   ========================================================= */
+
+/* =========================================
+   RESUMEN DE 3 TARJETAS (KPIs de insumos)
+========================================= */
+
+.summary-almacen-simple {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+
+    .summary-almacen-simple {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-almacen-simple {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================
+   MENSAJE DE ERROR EN EL FORMULARIO DEL MODAL
+   (login.css tiene su propia copia; esta pantalla
+   no carga login.css, asi que se repite aqui)
+========================================= */
+
+.mensaje-error {
+    color: var(--color-error);
+    font-size: 13px;
+    margin-top: -4px;
+}
+
+/* =========================================
+   RESPONSIVE DE LA TABLA
+========================================= */
+
+@media (max-width: 800px) {
+
+    .opps-table {
+        min-width: 720px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}

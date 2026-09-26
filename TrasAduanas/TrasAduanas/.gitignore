@@ -1,0 +1,38 @@
+# ---- Java / Maven / Spring Boot ----
+target/
+build/
+*.class
+*.jar
+*.war
+.mvn/
+mvnw
+mvnw.cmd
+
+# ---- Configuracion sensible ----
+# Nunca subir credenciales reales de base de datos
+application-local.properties
+application-local.yml
+.env
+*.env
+
+# ---- IDE ----
+.idea/
+*.iml
+*.iws
+.vscode/
+.settings/
+.project
+.classpath
+
+# ---- Node (por si mas adelante se agregan herramientas) ----
+node_modules/
+package-lock.json
+
+# ---- Sistema operativo ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Logs ----
+*.log
+logs/

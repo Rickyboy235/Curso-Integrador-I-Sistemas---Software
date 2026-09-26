@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Dirección — Usuarios y Roles</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/direccion.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="welcome">
+                    <div>
+                        <span class="welcome-label">ADMINISTRACIÓN</span>
+                        <h1>Usuarios y roles del sistema</h1>
+                        <p>Gestión de las cuentas que pueden acceder a Transflow y los permisos asociados a cada rol.</p>
+                    </div>
+                    <div class="welcome-decoration">TF</div>
+                </div>
+
+                <div class="summary summary-direccion">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Usuarios registrados</span>
+                            <strong id="kpi-usuarios-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>Usuarios activos</span>
+                            <strong id="kpi-usuarios-activos">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Roles configurados</span>
+                            <strong id="kpi-roles-total">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ================= USUARIOS ================= -->
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">CUENTAS</span>
+                        <h2>Usuarios</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count"><span id="usuarios-count">0</span> usuarios</span>
+                        <button class="btn-secundario" id="btnReporteDireccion" type="button">Ver Reporte</button>
+                        <button class="btn-nueva" id="btnNuevoUsuario" type="button">+ Nuevo usuario</button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>DNI</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usuarios-tbody"></tbody>
+                    </table>
+                    <p id="usuarios-mensaje-vacio" class="process-note" style="display:none;">No hay usuarios registrados todavía.</p>
+                </div>
+
+                <!-- ================= ROLES ================= -->
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">PERMISOS</span>
+                        <h2>Roles</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count"><span id="roles-count">0</span> roles</span>
+                        <button class="btn-nueva" id="btnNuevoRol" type="button">+ Nuevo rol</button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Nombre del rol</th>
+                                <th>Descripción</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roles-tbody"></tbody>
+                    </table>
+                    <p id="roles-mensaje-vacio" class="process-note" style="display:none;">No hay roles registrados todavía.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL USUARIO -->
+    <div class="modal-overlay" id="modalOverlayUsuario">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloUsuario">Nuevo usuario</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalUsuario">✕</button>
+            </div>
+
+            <form id="formUsuario">
+
+                <input type="hidden" id="campoIdUsuario">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoNombres">Nombres</label>
+                        <input type="text" id="campoNombres" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoApellidos">Apellidos</label>
+                        <input type="text" id="campoApellidos" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoEmail">Email</label>
+                        <input type="email" id="campoEmail" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoDni">DNI (8 dígitos)</label>
+                        <input type="text" id="campoDni" maxlength="8" pattern="\d{8}" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoRol">Rol</label>
+                    <select id="campoRol" required></select>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoPassword">Contraseña <span id="passwordHint" style="font-weight:normal;"></span></label>
+                    <input type="password" id="campoPassword" minlength="8" placeholder="Mínimo 8 caracteres">
+                </div>
+
+                <div class="form-field">
+                    <label for="campoEstadoUsuario">Estado</label>
+                    <select id="campoEstadoUsuario">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+
+                <p id="formErrorUsuario" class="form-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalUsuario">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar usuario</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL ROL -->
+    <div class="modal-overlay" id="modalOverlayRol">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloRol">Nuevo rol</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalRol">✕</button>
+            </div>
+
+            <form id="formRol">
+
+                <input type="hidden" id="campoIdRol">
+
+                <div class="form-field">
+                    <label for="campoNombreRol">Nombre del rol</label>
+                    <input type="text" id="campoNombreRol" placeholder="Ej. Operador de almacén" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoDescripcionRol">Descripción</label>
+                    <input type="text" id="campoDescripcionRol" placeholder="Ej. Acceso a insumos y vales de salida">
+                </div>
+
+                <p id="formErrorRol" class="form-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalRol">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar rol</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+        <!-- MODAL DE CONFIRMACION: ELIMINAR USUARIO -->
+    <div class="modal-overlay" id="confirmarEliminarUsuarioOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Confirmar eliminación</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarConfirmarEliminarUsuario">
+                    ✕
+                </button>
+
+            </div>
+
+            <p>
+                ¿Está seguro de que desea eliminar este usuario?
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    id="btnCancelarEliminarUsuario">
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnConfirmarEliminarUsuario">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- MODAL DE CONFIRMACION: ELIMINAR ROL -->
+    <div class="modal-overlay" id="confirmarEliminarRolOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Confirmar eliminación</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarConfirmarEliminarRol">
+                    ✕
+                </button>
+
+            </div>
+
+            <p>
+                ¿Está seguro de que desea eliminar este rol? Esto fallará si hay usuarios asignados a él.
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    id="btnCancelarEliminarRol">
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnConfirmarEliminarRol">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        <!-- MODAL DE MENSAJE -->
+    <div class="modal-overlay" id="mensajeModalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Acción no permitida</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarMensajeModal">
+                    ✕
+                </button>
+
+            </div>
+
+            <p id="mensajeModalTexto" class="mensaje-error"></p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnAceptarMensajeModal">
+                    Aceptar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/direccion.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport
+    xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+    name="liquidacion_tributos"
+    whenNoDataType="AllSectionsNoDetail"
+    pageWidth="842"
+    pageHeight="595"
+    orientation="Landscape"
+    columnWidth="802"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20">
+
+    <parameter name="tituloReporte" class="java.lang.String"/>
+
+    <!-- CAMPOS DEL REPORTE -->
+    <field name="idLiquidacion" class="java.lang.Integer"/>
+    <field name="numeroDam" class="java.lang.String"/>
+    <field name="adValorem" class="java.math.BigDecimal"/>
+    <field name="igv" class="java.math.BigDecimal"/>
+    <field name="ipm" class="java.math.BigDecimal"/>
+    <field name="totalTributos" class="java.math.BigDecimal"/>
+    <field name="estadoPago" class="java.lang.String"/>
+
+    <!-- TITULO -->
+    <title>
+        <band height="60">
+
+            <staticText>
+                <reportElement
+                    x="0"
+                    y="10"
+                    width="802"
+                    height="30"/>
+
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[Reporte de Liquidación de Tributos]]></text>
+            </staticText>
+
+        </band>
+    </title>
+
+    <!-- ENCABEZADOS DE LA TABLA -->
+    <columnHeader>
+        <band height="30">
+
+            <staticText>
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="70"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[N° Liquidación]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="70"
+                    y="0"
+                    width="150"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[N° DAM]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="220"
+                    y="0"
+                    width="110"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[Ad Valorem]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="330"
+                    y="0"
+                    width="100"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[IGV]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="430"
+                    y="0"
+                    width="100"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[IPM]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="530"
+                    y="0"
+                    width="120"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[Total]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement
+                    x="650"
+                    y="0"
+                    width="152"
+                    height="30"
+                    mode="Opaque"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="9" isBold="true"/>
+                </textElement>
+
+                <text><![CDATA[Estado]]></text>
+            </staticText>
+
+        </band>
+    </columnHeader>
+
+    <!-- FILAS DE DATOS -->
+    <detail>
+        <band height="25">
+
+            <textField>
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="70"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{idLiquidacion}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="70"
+                    y="0"
+                    width="150"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{numeroDam}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00">
+                <reportElement
+                    x="220"
+                    y="0"
+                    width="110"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center"
+             verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{adValorem}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00">
+                <reportElement
+                    x="330"
+                    y="0"
+                    width="100"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center"
+             verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{igv}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00">
+                <reportElement
+                    x="430"
+                    y="0"
+                    width="100"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center"
+             verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{ipm}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00">
+                <reportElement
+                    x="530"
+                    y="0"
+                    width="120"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center"
+             verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{totalTributos}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement
+                    x="650"
+                    y="0"
+                    width="152"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="1"/>
+                </box>
+
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+
+                <textFieldExpression><![CDATA[$F{estadoPago}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+</jasperReport>

@@ -1,0 +1,41 @@
+/* =========================================================
+   MODULO: AUDITORIA
+   Solo lo exclusivo de esta pantalla.
+   Lo comun vive en base.css, layout.css y componentes.css.
+   ========================================================= */
+
+.summary-auditoria {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1100px) {
+
+    .summary-auditoria {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-auditoria {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .opps-table {
+        min-width: 720px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}

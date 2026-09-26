@@ -1,0 +1,60 @@
+/* =========================================================
+   BASE
+   Variables de diseno, reset y tipografia.
+   Unico lugar donde se declaran los colores del sistema.
+   ========================================================= */
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+:root {
+
+    --color-tinta: #3E352C;
+    --color-tinta-suave: #5A4E42;
+
+    --color-ambar: #C9A66B;
+    --color-ambar-oscuro: #A9824D;
+
+    --color-papel: #FAF8F3;
+    --color-papel-hundido: #F0ECE3;
+
+    --color-teal: #6B7568;
+
+    --color-texto: #302B26;
+    --color-texto-suave: #756D63;
+
+    --color-borde: #DDD5C8;
+
+    --color-blanco: #FFFFFF;
+
+    --sidebar-width: 270px;
+
+
+    /* Variables aportadas por los modulos */
+    --color-perdida: #B94A3A;
+    --color-perdida-suave: rgba(185, 74, 58, 0.08);
+    --color-ganada: var(--color-teal);
+    --color-ganada-suave: rgba(107, 117, 104, 0.12);
+    --tinte-teal: #EEF1EE;
+    --tinte-ambar: #F7EFE0;
+    --tinte-neutro: var(--color-papel-hundido);
+    --color-programada: #6E7C8C;
+    --color-programada-suave: rgba(110, 124, 140, 0.14);
+}
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--color-papel);
+    color: var(--color-texto);
+}

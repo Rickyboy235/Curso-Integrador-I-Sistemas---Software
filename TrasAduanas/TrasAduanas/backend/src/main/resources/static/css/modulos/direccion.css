@@ -1,0 +1,39 @@
+.summary-direccion {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+
+    .summary-direccion {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-direccion {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+.mensaje-error {
+    color: var(--color-error);
+    font-size: 13px;
+    margin-top: -4px;
+}
+
+
+@media (max-width: 800px) {
+
+    .opps-table {
+        min-width: 920px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}

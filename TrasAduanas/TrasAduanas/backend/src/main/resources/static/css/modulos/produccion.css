@@ -1,0 +1,35 @@
+.summary-produccion {
+    grid-template-columns: repeat(5, 1fr);
+}
+
+@media (max-width: 1100px) {
+
+    .summary-produccion {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-produccion {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    .opps-table-wrapper .opps-table {
+        min-width: 920px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}
+
+#modalOverlayDetalles .modal {
+    overflow-x: auto;
+}

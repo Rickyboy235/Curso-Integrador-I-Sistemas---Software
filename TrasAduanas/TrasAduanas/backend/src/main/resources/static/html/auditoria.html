@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Control aduanero</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/auditoria.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="welcome">
+                    <div>
+                        <span class="welcome-label">CONTROL DOCUMENTARIO Y ADUANERO</span>
+                        <h1>Expedientes DAM e incidencias por orden de servicio</h1>
+                        <p>
+                            Seguimiento del canal asignado por SUNAT (verde,
+                            naranja o rojo) para cada expediente, y registro
+                            de incidencias reportadas durante la ejecución
+                            de las órdenes de servicio.
+                        </p>
+                    </div>
+                    <div class="welcome-decoration">TF</div>
+                </div>
+
+
+                <div class="summary summary-auditoria">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Total de expedientes</span>
+                            <strong id="kpi-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>Canal verde</span>
+                            <strong id="kpi-verde">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Canal naranja</span>
+                            <strong id="kpi-naranja">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">04</div>
+                        <div>
+                            <span>Canal rojo</span>
+                            <strong id="kpi-rojo">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">SUNAT TELEDESPACHO</span>
+                        <h2>Expedientes por canal</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count">
+                            <span id="expedientes-count">0</span> expedientes
+                        </span>
+                        <button class="btn-secundario" id="btnReporteExpedientes" type="button">
+                            Ver Reporte
+                        </button>
+                        <button class="btn-nueva" id="btnNuevoExpediente" type="button">
+                            + Nuevo expediente
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="pipeline-scroll">
+                    <div class="pipeline">
+
+                        <div class="pipeline-stage" data-stage="pendiente">
+                            <div class="pipeline-stage-head">
+                                <h4>Sin canal asignado</h4>
+                                <span class="pipeline-stage-count" id="count-pendiente">0</span>
+                            </div>
+                            <div id="pipeline-pendiente"></div>
+                        </div>
+
+                        <div class="pipeline-stage is-ganada" data-stage="verde">
+                            <div class="pipeline-stage-head">
+                                <h4>Verde</h4>
+                                <span class="pipeline-stage-count" id="count-verde">0</span>
+                            </div>
+                            <div id="pipeline-verde"></div>
+                        </div>
+
+                        <div class="pipeline-stage" data-stage="naranja">
+                            <div class="pipeline-stage-head">
+                                <h4>Naranja</h4>
+                                <span class="pipeline-stage-count" id="count-naranja">0</span>
+                            </div>
+                            <div id="pipeline-naranja"></div>
+                        </div>
+
+                        <div class="pipeline-stage is-perdida" data-stage="rojo">
+                            <div class="pipeline-stage-head">
+                                <h4>Rojo</h4>
+                                <span class="pipeline-stage-count" id="count-rojo">0</span>
+                            </div>
+                            <div id="pipeline-rojo"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">TRAZABILIDAD</span>
+                        <h2>Expedientes DAM</h2>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>N° expediente</th>
+                                <th>N° DAM</th>
+                                <th>Régimen</th>
+                                <th>Orden de servicio</th>
+                                <th>Cliente</th>
+                                <th>Canal</th>
+                                <th>Estado del trámite</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="expedientes-tbody"></tbody>
+                    </table>
+                </div>
+
+                <p id="mensaje-vacio-expedientes" class="process-note" style="display:none;">
+                    No hay expedientes DAM registrados todavía.
+                </p>
+
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">SEGUIMIENTO OPERATIVO</span>
+                        <h2>Incidencias reportadas</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <button class="btn-secundario" id="btnReporteIncidencias" type="button">
+                            Ver Reporte
+                        </button>
+                        <button class="btn-nueva" id="btnNuevaIncidencia" type="button">
+                            + Nueva incidencia
+                        </button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>Orden de servicio</th>
+                                <th>Cliente</th>
+                                <th>Tipo</th>
+                                <th>Descripción</th>
+                                <th>Fecha de reporte</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incidencias-tbody"></tbody>
+                    </table>
+                </div>
+
+                <p id="mensaje-vacio-incidencias" class="process-note" style="display:none;">
+                    No hay incidencias registradas todavía.
+                </p>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <div class="modal-overlay" id="modalOverlayExpediente">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloExpediente">Nuevo expediente</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalExpediente">✕</button>
+            </div>
+
+            <form id="formExpediente">
+
+                <input type="hidden" id="campoIdExpediente">
+
+                <div class="form-field">
+                    <label for="campoOrdenExpediente">Orden de servicio</label>
+                    <select id="campoOrdenExpediente" required></select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoNumeroDam">N° DAM (opcional hasta que SUNAT lo asigne)</label>
+                        <input type="text" id="campoNumeroDam" maxlength="20" placeholder="Ej. 118-2025-10-123456">
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoRegimen">Régimen</label>
+                        <input type="text" id="campoRegimen" maxlength="40" placeholder="Ej. Importación definitiva" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoCanal">Canal SUNAT</label>
+                        <select id="campoCanal">
+                            <option value="">Sin asignar</option>
+                            <option value="Verde">Verde</option>
+                            <option value="Naranja">Naranja</option>
+                            <option value="Rojo">Rojo</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="campoEstadoTramite">Estado del trámite</label>
+                        <select id="campoEstadoTramite" required>
+                            <option value="en_proceso">En proceso</option>
+                            <option value="levante_autorizado">Levante autorizado</option>
+                            <option value="retenida">Carga retenida</option>
+                        </select>
+                    </div>
+                </div>
+
+                <p id="formErrorExpediente" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalExpediente">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar expediente</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlayIncidencia">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3>Nueva incidencia</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalIncidencia">✕</button>
+            </div>
+
+            <form id="formIncidencia">
+
+                <input type="hidden" id="campoIdIncidencia">
+
+                <div class="form-field">
+                    <label for="campoOrdenIncidencia">Orden de servicio</label>
+                    <select id="campoOrdenIncidencia" required></select>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoTipoIncidencia">Tipo de incidencia</label>
+                    <input type="text" id="campoTipoIncidencia" maxlength="40" placeholder="Ej. Retraso en entrega" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="campoDescripcionIncidencia">Descripción</label>
+                    <textarea id="campoDescripcionIncidencia" maxlength="255" rows="3" placeholder="Detalle de lo ocurrido"></textarea>
+                </div>
+
+                <p id="formErrorIncidencia" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalIncidencia">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar incidencia</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL DE MENSAJE -->
+    <div class="modal-overlay" id="mensajeModalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Acción no permitida</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarMensajeModal">
+                    ✕
+                </button>
+
+            </div>
+
+            <p id="mensajeModalTexto" class="mensaje-error"></p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnAceptarMensajeModal">
+                    Aceptar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MODAL DE CONFIRMACIÓN -->
+    <div class="modal-overlay" id="confirmarEliminarOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Confirmar eliminación</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarConfirmarEliminar">
+                    ✕
+                </button>
+
+            </div>
+
+            <p id="confirmarEliminarTexto">
+                ¿Está seguro de que desea eliminar este registro?
+            </p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    id="btnCancelarEliminar">
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnConfirmarEliminar">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/auditoria.js"></script>
+
+</body>
+</html>

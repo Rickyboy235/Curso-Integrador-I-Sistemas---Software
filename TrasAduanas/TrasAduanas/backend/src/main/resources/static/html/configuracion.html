@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Configuración</title>
+
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/configuracion.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">CUENTA</span>
+                        <h2>Configuración</h2>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+
+                    <h3>Mi perfil</h3>
+                    <p class="settings-desc">Estos datos son los que se muestran en la barra superior.</p>
+
+                    <div class="mensaje-error" id="mensajeErrorPerfil"></div>
+                    <div class="mensaje-exito" id="mensajeExitoPerfil"></div>
+
+                    <form id="formPerfil">
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="campoNombres">Nombres</label>
+                                <input type="text" id="campoNombres" maxlength="80" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="campoApellidos">Apellidos</label>
+                                <input type="text" id="campoApellidos" maxlength="80" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="campoEmail">Correo</label>
+                                <input type="email" id="campoEmail" maxlength="100" required>
+                            </div>
+                            <div class="form-field">
+                                <label for="campoDni">DNI</label>
+                                <input type="text" id="campoDni" maxlength="8" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label>Rol</label>
+                            <input type="text" id="campoRol" disabled>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-nueva">Guardar cambios</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="settings-card">
+
+                    <h3>Cambiar contraseña</h3>
+                    <p class="settings-desc">Déjalo en blanco si no quieres cambiar tu contraseña actual.</p>
+
+                    <div class="mensaje-error" id="mensajeErrorPassword"></div>
+                    <div class="mensaje-exito" id="mensajeExitoPassword"></div>
+
+                    <form id="formPassword">
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="campoPasswordNueva">Nueva contraseña</label>
+                                <input type="password" id="campoPasswordNueva" minlength="8">
+                            </div>
+                            <div class="form-field">
+                                <label for="campoPasswordConfirmar">Confirmar contraseña</label>
+                                <input type="password" id="campoPasswordConfirmar" minlength="8">
+                            </div>
+                        </div>
+
+                        <div class="modal-actions">
+                            <button type="submit" class="btn-nueva">Actualizar contraseña</button>
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/configuracion.js"></script>
+
+</body>
+</html>

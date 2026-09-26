@@ -1,0 +1,109 @@
+/* =========================================================
+   MODULO: VENTAS
+   Solo lo exclusivo de esta pantalla.
+   Lo comun vive en base.css, layout.css y componentes.css.
+   ========================================================= */
+
+.summary-ventas-simple {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 900px) {
+
+    .summary-ventas-simple {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .summary-ventas-simple {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =========================================
+   MODAL MAS ANCHO (para el formulario de
+   cotizacion con servicios anidados)
+========================================= */
+
+.modal-grande {
+    max-width: 640px;
+}
+
+/* =========================================
+   SERVICIOS COTIZADOS DENTRO DEL MODAL
+========================================= */
+
+.servicios-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.servicio-fila {
+    display: grid;
+    grid-template-columns: 1fr 90px 120px 32px;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.servicio-fila input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--color-borde, #ddd);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.btn-quitar-servicio {
+    border: none;
+    background: var(--color-papel-hundido);
+    color: var(--color-perdida);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.servicios-total {
+    text-align: right;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+/* =========================================
+   MENSAJE DE ERROR EN EL FORMULARIO DEL MODAL
+========================================= */
+
+.mensaje-error {
+    color: var(--color-error);
+    font-size: 13px;
+    margin-top: -4px;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .opps-table {
+        min-width: 900px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}
+
+@media (max-width: 560px) {
+
+    .servicio-fila {
+        grid-template-columns: 1fr;
+    }
+
+}

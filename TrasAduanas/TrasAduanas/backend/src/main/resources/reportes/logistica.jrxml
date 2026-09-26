@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jasperReport
+    xmlns="http://jasperreports.sourceforge.net/jasperreports"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components"
+    xsi:schemaLocation="
+        http://jasperreports.sourceforge.net/jasperreports
+        http://jasperreports.sourceforge.net/xsd/jasperreport.xsd
+        http://jasperreports.sourceforge.net/jasperreports/components
+        http://jasperreports.sourceforge.net/jasperreports/components.xsd"
+    name="logistica"
+    pageWidth="842"
+    pageHeight="595"
+    orientation="Landscape"
+    columnWidth="802"
+    leftMargin="20"
+    rightMargin="20"
+    topMargin="20"
+    bottomMargin="20"
+    whenNoDataType="AllSectionsNoDetail">
+
+    <subDataset name="vehiculosDataset">
+
+        <field name="idVehiculo" class="java.lang.Integer"/>
+        <field name="placaTracto" class="java.lang.String"/>
+        <field name="placaCarreta" class="java.lang.String"/>
+        <field name="soatVencimiento" class="java.time.LocalDate"/>
+        <field name="citvVencimiento" class="java.time.LocalDate"/>
+        <field name="estado" class="java.lang.String"/>
+
+    </subDataset>
+
+    <subDataset name="conductoresDataset">
+
+        <field name="idConductor" class="java.lang.Integer"/>
+        <field name="nombres" class="java.lang.String"/>
+        <field name="apellidos" class="java.lang.String"/>
+        <field name="numDoc" class="java.lang.String"/>
+        <field name="licencia" class="java.lang.String"/>
+        <field name="categoria" class="java.lang.String"/>
+        <field name="vencimientoLicencia" class="java.time.LocalDate"/>
+        <field name="estado" class="java.lang.String"/>
+
+    </subDataset>
+
+    <parameter name="vehiculos" class="java.util.List"/>
+    <parameter name="conductores" class="java.util.List"/>
+
+    <title>
+
+        <band height="60">
+
+            <staticText>
+
+                <reportElement
+                    x="0"
+                    y="10"
+                    width="802"
+                    height="30"/>
+
+                <textElement textAlignment="Center">
+
+                    <font
+                        size="18"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Reporte de Logística]]></text>
+
+            </staticText>
+
+        </band>
+
+    </title>
+
+    <detail>
+
+        <band height="75" splitType="Stretch">
+
+
+            <staticText>
+
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="802"
+                    height="25"/>
+
+                <textElement>
+
+                    <font
+                        size="14"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Vehículos]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="0"
+                    y="25"
+                    width="150"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Placa tracto]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="150"
+                    y="25"
+                    width="130"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Placa carreta]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="280"
+                    y="25"
+                    width="130"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Vence SOAT]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="410"
+                    y="25"
+                    width="130"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Vence CITV]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="540"
+                    y="25"
+                    width="100"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Estado]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="640"
+                    y="25"
+                    width="162"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[ID vehículo]]></text>
+
+            </staticText>
+
+            <componentElement>
+
+                <reportElement
+                    x="0"
+                    y="50"
+                    width="802"
+                    height="25"/>
+
+                <jr:list>
+
+                    <datasetRun
+                        subDataset="vehiculosDataset">
+
+                        <dataSourceExpression><![CDATA[
+                            new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+                                $P{vehiculos}
+                            )
+                        ]]></dataSourceExpression>
+
+                    </datasetRun>
+
+
+                    <jr:listContents
+                        height="25"
+                        width="802">
+
+
+                        <textField>
+
+                            <reportElement
+                                x="0"
+                                y="0"
+                                width="150"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+                            <textFieldExpression><![CDATA[
+                                $F{placaTracto}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <textField>
+
+                            <reportElement
+                                x="150"
+                                y="0"
+                                width="130"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{placaCarreta}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+                        <textField>
+
+                            <reportElement
+                                x="280"
+                                y="0"
+                                width="130"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{soatVencimiento}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+                        <textField>
+
+                            <reportElement
+                                x="410"
+                                y="0"
+                                width="130"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{citvVencimiento}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+                        <textField>
+
+                            <reportElement
+                                x="540"
+                                y="0"
+                                width="100"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{estado}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+                        <textField>
+
+                            <reportElement
+                                x="640"
+                                y="0"
+                                width="162"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{idVehiculo}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                    </jr:listContents>
+
+                </jr:list>
+
+            </componentElement>
+
+        </band>
+
+
+        <band height="100" splitType="Stretch">
+
+
+            <staticText>
+
+                <reportElement
+                    x="0"
+                    y="0"
+                    width="802"
+                    height="25"/>
+
+                <textElement>
+
+                    <font
+                        size="14"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Conductores]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="0"
+                    y="25"
+                    width="160"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Nombre]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="160"
+                    y="25"
+                    width="110"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[N° documento]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="270"
+                    y="25"
+                    width="120"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Licencia]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="390"
+                    y="25"
+                    width="90"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Categoría]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="480"
+                    y="25"
+                    width="130"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Vence licencia]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="610"
+                    y="25"
+                    width="100"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[Estado]]></text>
+
+            </staticText>
+
+
+            <staticText>
+
+                <reportElement
+                    x="710"
+                    y="25"
+                    width="92"
+                    height="25"/>
+
+                <box>
+                    <pen lineWidth="0.5"/>
+                </box>
+
+                <textElement
+                    textAlignment="Center"
+                    verticalAlignment="Middle">
+
+                    <font
+                        size="9"
+                        isBold="true"/>
+
+                </textElement>
+
+                <text><![CDATA[ID]]></text>
+
+            </staticText>
+
+
+            <componentElement>
+
+                <reportElement
+                    x="0"
+                    y="50"
+                    width="802"
+                    height="25"/>
+
+                <jr:list>
+
+                    <datasetRun
+                        subDataset="conductoresDataset">
+
+                        <dataSourceExpression><![CDATA[
+                            new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource(
+                                $P{conductores}
+                            )
+                        ]]></dataSourceExpression>
+
+                    </datasetRun>
+
+
+                    <jr:listContents
+                        height="25"
+                        width="802">
+
+
+                        <!-- NOMBRE -->
+
+                        <textField>
+
+                            <reportElement
+                                x="0"
+                                y="0"
+                                width="160"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{nombres} + " " + $F{apellidos}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- DOCUMENTO -->
+
+                        <textField>
+
+                            <reportElement
+                                x="160"
+                                y="0"
+                                width="110"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{numDoc}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- LICENCIA -->
+
+                        <textField>
+
+                            <reportElement
+                                x="270"
+                                y="0"
+                                width="120"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{licencia}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- CATEGORÍA -->
+
+                        <textField>
+
+                            <reportElement
+                                x="390"
+                                y="0"
+                                width="90"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{categoria}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- VENCIMIENTO -->
+
+                        <textField>
+
+                            <reportElement
+                                x="480"
+                                y="0"
+                                width="130"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{vencimientoLicencia}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- ESTADO -->
+
+                        <textField>
+
+                            <reportElement
+                                x="610"
+                                y="0"
+                                width="100"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{estado}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                        <!-- ID -->
+
+                        <textField>
+
+                            <reportElement
+                                x="710"
+                                y="0"
+                                width="92"
+                                height="25"/>
+
+                            <box>
+                                <pen lineWidth="0.5"/>
+                            </box>
+
+                            <textElement
+                                textAlignment="Center"
+                                verticalAlignment="Middle"/>
+
+                            <textFieldExpression><![CDATA[
+                                $F{idConductor}
+                            ]]></textFieldExpression>
+
+                        </textField>
+
+
+                    </jr:listContents>
+
+                </jr:list>
+
+            </componentElement>
+
+        </band>
+
+    </detail>
+
+</jasperReport>

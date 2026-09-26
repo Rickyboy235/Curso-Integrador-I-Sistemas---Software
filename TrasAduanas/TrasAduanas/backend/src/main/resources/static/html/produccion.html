@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Transflow | Producción — Vales de salida</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/componentes.css">
+    <link rel="stylesheet" href="../css/modulos/produccion.css">
+</head>
+<body>
+
+    <div class="app">
+
+        <div id="layout-sidebar"></div>
+
+        <main class="main">
+
+            <div id="layout-topbar"></div>
+
+            <section class="content">
+
+                <div class="welcome">
+                    <div>
+                        <span class="welcome-label">ALMACÉN → CAMPO</span>
+                        <h1>Vales de salida</h1>
+                        <p>Registro de insumos despachados hacia cada orden de servicio, con descuento automático de stock.</p>
+                    </div>
+                    <div class="welcome-decoration">TF</div>
+                </div>
+
+                <div class="summary">
+
+                    <div class="summary-card">
+                        <div class="summary-icon">01</div>
+                        <div>
+                            <span>Vales emitidos</span>
+                            <strong id="kpi-vales-total">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">02</div>
+                        <div>
+                            <span>Vales de hoy</span>
+                            <strong id="kpi-vales-hoy">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="summary-icon">03</div>
+                        <div>
+                            <span>Insumos con stock bajo</span>
+                            <strong id="kpi-stock-bajo">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <span class="section-label">DESPACHO</span>
+                        <h2>Vales de salida</h2>
+                    </div>
+
+                    <div class="pipeline-actions">
+                        <span class="process-count"><span id="vales-count">0</span> vales</span>
+
+                        <button class="btn-secundario" id="btnReporteProduccion" type="button">
+                            Ver Reporte
+                        </button>
+
+                        <button class="btn-nueva" id="btnNuevoVale" type="button">
+                            + Nuevo vale
+                        </button>
+                    </div>
+                </div>
+
+                <div class="opps-table-wrapper">
+                    <table class="opps-table">
+                        <thead>
+                            <tr>
+                                <th>N° vale</th>
+                                <th>Orden de servicio</th>
+                                <th>Fecha de emisión</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vales-tbody"></tbody>
+                    </table>
+                    <p id="vales-mensaje-vacio" class="process-note" style="display:none;">No hay vales de salida registrados todavía.</p>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL VALE -->
+    <div class="modal-overlay" id="modalOverlayVale">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloVale">Nuevo vale de salida</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalVale">✕</button>
+            </div>
+
+            <form id="formVale">
+
+                <input type="hidden" id="campoIdVale">
+
+                <div class="form-field">
+                    <label for="campoOrdenServicio">Orden de servicio</label>
+                    <select id="campoOrdenServicio" required></select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoNumeroVale">N° de vale</label>
+                        <input type="text" id="campoNumeroVale" maxlength="20" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoFechaEmision">Fecha de emisión (opcional, hoy si se deja vacío)</label>
+                        <input type="date" id="campoFechaEmision">
+                    </div>
+                </div>
+
+                <p id="formErrorVale" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCancelarModalVale">Cancelar</button>
+                    <button type="submit" class="btn-nueva">Guardar vale</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL DETALLES DE UN VALE -->
+    <div class="modal-overlay" id="modalOverlayDetalles">
+        <div class="modal">
+
+            <div class="modal-head">
+                <h3 id="modalTituloDetalles">Detalle del vale</h3>
+                <button type="button" class="modal-close" id="btnCerrarModalDetalles">✕</button>
+            </div>
+
+            <table class="opps-table">
+                <thead>
+                    <tr>
+                        <th>Insumo</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="detalles-tbody"></tbody>
+            </table>
+            <p id="detalles-mensaje-vacio" class="process-note" style="display:none;">Este vale todavía no tiene insumos agregados.</p>
+
+            <form id="formDetalle" style="margin-top:16px;">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="campoInsumo">Insumo</label>
+                        <select id="campoInsumo" required></select>
+                    </div>
+                    <div class="form-field">
+                        <label for="campoCantidadDetalle">Cantidad</label>
+                        <input type="number" id="campoCantidadDetalle" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+
+                <p id="formErrorDetalle" class="mensaje-error" style="display:none;"></p>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" id="btnCerrarModalDetalles2">Cerrar</button>
+                    <button type="submit" class="btn-nueva">Agregar insumo</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+            <!-- MODAL DE CONFIRMACIÓN -->
+    <div class="modal-overlay" id="confirmModalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-head">
+
+                <h3>Confirmar</h3>
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="btnCerrarConfirmModal">
+                    ✕
+                </button>
+
+            </div>
+
+            <p id="confirmModalTexto"></p>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secundario"
+                    id="btnCancelarConfirmModal">
+                    Cancelar
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-nueva"
+                    id="btnAceptarConfirmModal">
+                    Eliminar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/layout.js"></script>
+    <script src="../js/utils.js"></script>
+    <script src="../js/modal.js"></script>
+    <script src="../js/modulos/produccion.js"></script>
+
+</body>
+</html>

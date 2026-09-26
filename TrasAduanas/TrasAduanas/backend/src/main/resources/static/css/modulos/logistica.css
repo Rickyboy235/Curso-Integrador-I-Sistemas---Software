@@ -1,0 +1,21 @@
+/* =========================================================
+   MODULO: LOGISTICA
+   Solo lo exclusivo de esta pantalla.
+   Lo comun vive en base.css, layout.css y componentes.css.
+   ========================================================= */
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .opps-table {
+        min-width: 720px;
+    }
+
+    .opps-table-wrapper {
+        overflow-x: auto;
+    }
+
+}
